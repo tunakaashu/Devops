@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ashuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="patient_Id" />
+          </Key>
+          <Property Name="patient_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_Name" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="varchar" MaxLength="10" />
+          <Property Name="marital_status" Type="varchar" MaxLength="10" />
+          <Property Name="age" Type="int" />
+          <Property Name="phone_no" Type="bigint" />
+          <Property Name="address" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="userlogin">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="add_patient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patient_Name" Type="varchar" Mode="In" />
+          <Parameter Name="gender" Type="varchar" Mode="In" />
+          <Parameter Name="marital_status" Type="varchar" Mode="In" />
+          <Parameter Name="age" Type="int" Mode="In" />
+          <Parameter Name="phone_no" Type="bigint" Mode="In" />
+          <Parameter Name="address" Type="varchar(max)" Mode="In" />
+          <Parameter Name="patient_Id_out" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="delete_patient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patient_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="update_patient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patient_Id" Type="int" Mode="In" />
+          <Parameter Name="patient_Name" Type="varchar" Mode="In" />
+          <Parameter Name="gender" Type="varchar" Mode="In" />
+          <Parameter Name="marital_status" Type="varchar" Mode="In" />
+          <Parameter Name="age" Type="int" Mode="In" />
+          <Parameter Name="phone_no" Type="bigint" Mode="In" />
+          <Parameter Name="address" Type="varchar(max)" Mode="In" />
+          <Parameter Name="patient_Id_out" Type="int" Mode="In" />
+        </Function>
+        <Function Name="view_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patient_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="view_patient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patient_Id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ashuModelStoreContainer">
+          <EntitySet Name="patient" EntityType="Self.patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userlogin" EntityType="Self.userlogin" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ashuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="patient_Id" />
+          </Key>
+          <Property Name="patient_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="marital_status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="phone_no" Type="Int64" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="userlogin">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="patient_data" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="patients" EntityType="Self.patient" />
+          <EntitySet Name="userlogins" EntityType="Self.userlogin" />
+          <FunctionImport Name="add_patient">
+            <Parameter Name="patient_Name" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="marital_status" Mode="In" Type="String" />
+            <Parameter Name="age" Mode="In" Type="Int32" />
+            <Parameter Name="phone_no" Mode="In" Type="Int64" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="patient_Id_out" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="delete_patient">
+          <Parameter Name="patient_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="view_patient" ReturnType="Collection(ashuModel.view_patient_Result)">
+          <Parameter Name="patient_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="update_patient">
+            <Parameter Name="patient_Id" Mode="In" Type="Int32" />
+            <Parameter Name="patient_Name" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="marital_status" Mode="In" Type="String" />
+            <Parameter Name="age" Mode="In" Type="Int32" />
+            <Parameter Name="phone_no" Mode="In" Type="Int64" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="patient_Id_out" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="view_Id" ReturnType="Collection(ashuModel.view_Id_Result)">
+          <Parameter Name="patient_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="view_patient_Result">
+          <Property Type="Int32" Name="patient_Id" Nullable="false" />
+          <Property Type="String" Name="patient_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="marital_status" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="age" Nullable="true" />
+          <Property Type="Int64" Name="phone_no" Nullable="true" />
+          <Property Type="String" Name="address" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="view_Id_Result">
+          <Property Type="Int32" Name="patient_Id" Nullable="false" />
+          <Property Type="String" Name="patient_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="marital_status" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="age" Nullable="true" />
+          <Property Type="Int64" Name="phone_no" Nullable="true" />
+          <Property Type="String" Name="address" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ashuModelStoreContainer" CdmEntityContainer="patient_data">
+          <EntitySetMapping Name="patients">
+            <EntityTypeMapping TypeName="ashuModel.patient">
+              <MappingFragment StoreEntitySet="patient">
+                <ScalarProperty Name="patient_Id" ColumnName="patient_Id" />
+                <ScalarProperty Name="patient_Name" ColumnName="patient_Name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userlogins">
+            <EntityTypeMapping TypeName="ashuModel.userlogin">
+              <MappingFragment StoreEntitySet="userlogin">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="add_patient" FunctionName="ashuModel.Store.add_patient" />
+          <FunctionImportMapping FunctionImportName="delete_patient" FunctionName="ashuModel.Store.delete_patient" />
+          <FunctionImportMapping FunctionImportName="view_patient" FunctionName="ashuModel.Store.view_patient">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ashuModel.view_patient_Result">
+                <ScalarProperty Name="patient_Id" ColumnName="patient_Id" />
+                <ScalarProperty Name="patient_Name" ColumnName="patient_Name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="update_patient" FunctionName="ashuModel.Store.update_patient" />
+          <FunctionImportMapping FunctionImportName="view_Id" FunctionName="ashuModel.Store.view_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ashuModel.view_Id_Result">
+                <ScalarProperty Name="patient_Id" ColumnName="patient_Id" />
+                <ScalarProperty Name="patient_Name" ColumnName="patient_Name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

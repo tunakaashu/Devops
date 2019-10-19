@@ -1,0 +1,29 @@
+﻿body, html {
+    height: auto;
+    background-repeat: no-repeat;
+    background-color: #89C4F4;
+    color: white;
+}
+
+
+.contentbar {
+    background-color: #4B77BE;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 0 10px 10px;
+    width: auto;
+    height: auto;
+    color: #4B77BE;
+}
+.profile-img-card {
+   
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.imgradius {
+    width: 96px;
+    height: 96px;
+}
