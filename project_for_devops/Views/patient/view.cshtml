@@ -1,0 +1,81 @@
+﻿@model IEnumerable<project_for_devops.Models.view_patient_Result>
+
+@{
+    ViewBag.Title = "view";
+}
+<link rel="stylesheet" href="~/Content/custctyle.css" />
+<h2 style="color:#000000">Patient Details</h2>
+
+<p style="color:#000000">
+    @Html.ActionLink("Add Patient", "add")
+</p>
+<table class="table">
+    <tr>
+        <th style="color:#000000">
+            @Html.DisplayName("Patient ID")
+        </th>
+        <th style="color:#000000">
+            @Html.DisplayName("Patient Name")
+        </th>
+        <th style="color:#000000">
+            @Html.DisplayName("Gender")
+        </th>
+        <th style="color:#000000">
+            @Html.DisplayName("Marital status")
+        </th>
+        <th style="color:#000000">
+            @Html.DisplayName("Age")
+        </th>
+        <th style="color:#000000">
+            @Html.DisplayName("Phone")
+        </th>
+        <th style="color:#000000">
+            @Html.DisplayName("Address")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.patient_Id)
+        </td>
+
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.patient_Name)
+        </td>
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.marital_status)
+        </td>
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.age)
+        </td>
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.phone_no)
+        </td>
+        <td style="color:#000000">
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td style="color:#000000">
+            @*@Html.ActionLink("update", "update", new { id=item.patient_Id }) |*@
+          
+            @Html.ActionLink("Delete", "Delete", new { id = item.patient_Id }, new { onclick = "return confirm('Are you sure want to delete patient Id" + item.patient_Id + "');" })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

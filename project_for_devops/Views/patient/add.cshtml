@@ -1,0 +1,146 @@
+﻿@model project_for_devops.Models.patient
+
+@{
+    ViewBag.Title = "add";
+}
+
+<h2 style="color:#000000">Register Here<span class="glyphicon glyphicon-log-in"></span></h2>
+
+<head>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="~/Content/newvalidation.js"></script>
+
+
+    <style>
+        select:invalid {
+            border: 2px dashed red;
+        }
+    </style>
+</head>
+@if(ViewBag.Message!=null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        }
+    </script>
+}
+
+<body>
+  
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <div class="row col-md-12">
+                <div class="form-horizontal">
+                    <h4 style="color:#000000">Enter Patient Details</h4>
+                    <hr />
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div ng-app="customerapp" ng-controller="validate">
+                        <div class="form-group">
+                            @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Editor("First Name", new { htmlAttributes = new { @class = "form-control", name = "text1", required = "required", ng_model = "text1", placeholder = "Enter your First Name" } })
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Editor("Last Name", new { htmlAttributes = new { @class = "form-control", required = "required", name = "text2", ng_model = "text2", ng_change = "test(text1,text2)", placeholder = "Enter your Last Name" } })
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.patient_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "custnameTextBox1", required = "required", ng_model = "ans" } })
+                                @Html.ValidationMessageFor(model => model.patient_Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                Male @Html.RadioButton("Gender", "Male", new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                Female @Html.RadioButton("Gender", "Female", new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Date of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Editor("dob", new { htmlAttributes = new { @class = "form-control", ng_model = "date", ng_change = "agecal(date)", required = "required", @Type = "Date" } })
+                                @Html.ValidationMessage("", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Age", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control", ng_model = "age", @readonly = "readonly", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Marital Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                Married @Html.RadioButton("marital_status", "Married", new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                Unmarried @Html.RadioButton("marital_status", "Unmarried", new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.Label("Phone", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.phone_no, new { htmlAttributes = new { @class = "form-control", type = "number", id = "phid", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.phone_no, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.address, new { htmlAttributes = new { @class = "form-control", name = "phfun", ng_model = "phfun", ng_change = "phtest(phno)", required = "required" } })
+                                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Register" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div style="color:#000000">
+            @Html.ActionLink("View all patients", "view")
+        </div>
+
+
+
+        }
+    </body>
+
+
+<link rel="stylesheet" href="~/Content/SearchStyle.css" />
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
